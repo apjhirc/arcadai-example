@@ -1,6 +1,6 @@
 :root {
-  --bg: #070b10;
-  --bg2: #0c1219;
+  --bg: #101924;
+  --bg2: #131e2b;
   --panel: #0f1720;
   --panel2: #131d28;
   --line: #1e2b3a;
@@ -11,10 +11,10 @@
   --accent2: #0ea5b7;
   --good: #4ade80;
   --bad: #f87171;
-  --warn: #fbbf24;
+  --warn: #ff9603;
   --compute: #38bdf8;
-  --storage: #a78bfa;
-  --gpu: #f472b6;
+  --storage: #ffa4a4;
+  --gpu: #45ba17;
   --radius: 10px;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --sans: 'Space Grotesk', system-ui, -apple-system, Segoe UI, sans-serif;
