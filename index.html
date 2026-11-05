@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uptime Tycoon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div>
+        <button class="company" id="companyName" data-action="rename" title="Rename company">NimbusStack</button>
+        <div class="subtitle">Hosting &amp; Cloud Infrastructure</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="k">Cash</span><span class="v mono" id="cash">$0</span></div>
+      <div class="stat"><span class="k">Net / hour</span><span class="v mono" id="net">$0</span></div>
+      <div class="stat">
+        <span class="k">Reputation</span>
+        <span class="v mono" id="rep">50</span>
+        <span class="repbar"><span id="repBar"></span></span>
+      </div>
+      <div class="stat"><span class="k">Valuation</span><span class="v mono" id="valuation">$0</span></div>
+      <div class="stat"><span class="k">Clock</span><span class="v mono" id="clock">Day 1 · 08:00</span></div>
+    </div>
+
+    <div class="controls">
+      <div class="speed" role="group" aria-label="Game speed">
+        <button data-action="speed" data-id="0" title="Pause (Space)">❚❚</button>
+        <button data-action="speed" data-id="1">1×</button>
+        <button data-action="speed" data-id="3">3×</button>
+        <button data-action="speed" data-id="10">10×</button>
+      </div>
+      <button class="ghost" data-action="help" title="How to play">?</button>
+      <button class="ghost" data-action="save">Save</button>
+      <button class="ghost danger" data-action="reset">Reset</button>
+    </div>
+  </header>
+
+  <div class="alerts">
+    <div id="effects" class="effects"></div>
+    <div id="debt" class="debt" hidden></div>
+  </div>
+
+  <main class="layout">
+    <!-- LEFT: management -->
+    <aside class="panel left">
+      <nav class="tabs" id="tabs">
+        <button data-action="tab" data-id="hardware">Hardware</button>
+        <button data-action="tab" data-id="facilities">Facilities</button>
+        <button data-action="tab" data-id="staff">Staff</button>
+        <button data-action="tab" data-id="research">R&amp;D</button>
+        <button data-action="tab" data-id="marketing">Marketing</button>
+      </nav>
+      <div id="tabContent" class="tab-content"></div>
+    </aside>
+
+    <!-- CENTER: data center floor -->
+    <section class="panel center">
+      <div class="fac-tabs" id="facTabs"></div>
+      <div class="fac-head">
+        <div>
+          <h2 id="facName">Garage Closet</h2>
+          <p id="facDesc" class="muted"></p>
+        </div>
+        <div id="facActions"></div>
+      </div>
+      <div class="meters">
+        <div class="meter">
+          <div class="meter-k"><span>⚡ Power</span><span class="mono" id="powerTxt"></span></div>
+          <div class="meter-bar"><span id="powerBar"></span></div>
+        </div>
+        <div class="meter">
+          <div class="meter-k"><span>❄ Cooling</span><span class="mono" id="coolTxt"></span></div>
+          <div class="meter-bar"><span id="coolBar"></span></div>
+        </div>
+        <div class="meter">
+          <div class="meter-k"><span>▤ Slots</span><span class="mono" id="slotTxt"></span></div>
+          <div class="meter-bar"><span id="slotBar"></span></div>
+        </div>
+      </div>
+      <div class="floor">
+        <div id="rack" class="rack"></div>
+      </div>
+      <div id="selection" class="selection"></div>
+    </section>
+
+    <!-- RIGHT: market + ops -->
+    <aside class="panel right">
+      <section class="box">
+        <h3>Market &amp; Pricing</h3>
+        <div id="market"></div>
+      </section>
+      <section class="box">
+        <h3>Hourly P&amp;L</h3>
+        <div id="finance" class="finance"></div>
+      </section>
+      <section class="box grow">
+        <h3>NOC Event Log</h3>
+        <ul id="log" class="log"></ul>
+      </section>
+      <section class="box">
+        <h3>Milestones <span id="msCount" class="muted"></span></h3>
+        <ul id="milestones" class="milestones"></ul>
+      </section>
+    </aside>
+  </main>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="modal" class="modal" hidden>
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
