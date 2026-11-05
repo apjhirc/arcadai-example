@@ -639,6 +639,7 @@ function renderTop() {
   bar.style.width = S.rep + '%';
   $('#valuation').textContent = money(valuation());
   $('#clock').textContent = `Day ${Math.floor(S.hour / 24) + 1} · ${String(S.hour % 24).padStart(2, '0')}:00`;
+  $('#eventCountdown').textContent = `${Math.max(0, S.nextEvent - S.hour)}h`;
 
   document.querySelectorAll('.speed button').forEach(b => b.classList.toggle('active', +b.dataset.id === S.speed));
 
