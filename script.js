@@ -15,7 +15,7 @@ const PRODUCTS = {
 
 const LOCATIONS = [
   { id: 'garage',   name: 'Garage Closet',        cost: 0,     slots: 4,   power: 3,     cooling: 2.5,   rent: 2,     desc: 'A shelf, a fan and a dream. Every empire starts somewhere.' },
-  { id: 'basement', name: 'Office Basement',      cost: 8000,  slots: 12,  power: 15,    cooling: 12,    rent: 25,    desc: 'Raised floor? More like raised eyebrows from the landlord.' },
+  { id: 'basement', name: "Your House's Basement",      cost: 8000,  slots: 12,  power: 15,    cooling: 12,    rent: 25,    desc: 'Raised floor? More like raised eyebrows from the landlord.' },
   { id: 'colo',     name: 'Colocation Cage',      cost: 90000, slots: 24,  power: 60,    cooling: 55,    rent: 180,   desc: 'A locked cage inside somebody else\'s data center.' },
   { id: 'tier3',    name: 'Tier III Data Center', cost: 1.2e6, slots: 48,  power: 400,   cooling: 380,   rent: 1500,  desc: 'Redundant everything. N+1 all the way down.' },
   { id: 'hyper',    name: 'Hyperscale Campus',    cost: 2.5e7, slots: 96,  power: 4000,  cooling: 3800,  rent: 15000, desc: 'Its own substation. Possibly its own weather system.' },
@@ -46,10 +46,10 @@ const RESEARCH = [
   { id: 'gpulic',  name: 'GPU Partner Program',        cost: 60000,  desc: 'Opens the GPU market. Unlocks GPU Nodes.' },
   { id: 'solar',   name: 'Solar Power Purchase',       cost: 120000, desc: '-30% electricity cost.' },
   { id: 'auto',    name: 'Fleet Automation',           cost: 350000, desc: 'Engineers cover and repair 2× more. Unlocks HPC Racks.' },
-  { id: 'cdn',     name: 'Global CDN',                 cost: 500000, desc: '+25% demand for every product.' },
+  { id: 'cdn',     name: 'Global CDN Service',                 cost: 500000, desc: '+25% demand for every product.' },
   { id: 'liquid',  name: 'Liquid Immersion Cooling',   cost: 2e6,    desc: '+40% cooling. Unlocks AI Training Clusters.', req: 'gpulic' },
   { id: 'aiops',   name: 'AIOps Autopilot',            cost: 5e6,    desc: '-50% hardware failures, +10% reputation gain.', req: 'auto' },
-  { id: 'smr',     name: 'Small Modular Reactor',      cost: 2e7,    desc: '-50% electricity cost, +25% power capacity.', req: 'solar' },
+  { id: 'smr',     name: 'Small Modular Nuclear Reactor',      cost: 2e7,    desc: '-50% electricity cost, +25% power capacity.', req: 'solar' },
   { id: 'quantum', name: 'Quantum Research Lab',       cost: 8e7,    desc: 'Unlocks Quantum Coprocessors.', req: 'liquid' },
 ];
 const RES = Object.fromEntries(RESEARCH.map(r => [r.id, r]));
