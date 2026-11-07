@@ -266,7 +266,7 @@ const EVENTS = [
   { id: 'ddos', w: 3, run() {
       if (has('ddos')) { log('DDoS attack absorbed by your scrubbing network. 🛡️', 'good'); return; }
       S.effects.ddos = S.hour + 12; S.rep = clamp(S.rep - 2, 0, 100);
-      log('DDoS attack! Revenue -40% for 12h. Reputation -2.', 'bad');
+      log('Godammit DDoS attack! Revenue -40% for 12h. Reputation -2.', 'bad');
   } },
   { id: 'heatwave', w: 3, run() {
       S.effects.heatwave = S.hour + 24;
@@ -287,12 +287,12 @@ const EVENTS = [
       for (let i = 0; i < n && all.length; i++) {
         all.splice(Math.floor(Math.random() * all.length), 1)[0].b = true;
       }
-      log(`Vendor firmware bug bricked ${n} server${n > 1 ? 's' : ''}.`, 'bad');
+      log(`Oh no... Vendor firmware bug bricked ${n} server${n > 1 ? 's' : ''}.`, 'bad');
   } },
   { id: 'investor', w: 2, run() {
       const g = Math.round(Math.max(1000, S.last.rev * 12));
       S.cash += g;
-      log(`An angel investor wired you ${money(g)}. 💸`, 'good');
+      log(`Somehow Elon wired you ${money(g)}. 💸`, 'good');
   } },
   { id: 'review', w: 2, run() {
       if (S.rep >= 60) { S.rep = clamp(S.rep + 4, 0, 100); log('Glowing review on a big tech blog. Reputation +4.', 'good'); }
@@ -583,7 +583,7 @@ function act(a, id) {
       if (!x || !x.b || S.cash < repairCost(x)) return;
       S.cash -= repairCost(x);
       x.b = false;
-      log(`Paid an emergency tech to fix a ${SRV[x.t].name}.`);
+      log(`Paid an emergency techician to fix a ${SRV[x.t].name}.`);
       break;
     }
     case 'repairAll': {
@@ -599,7 +599,7 @@ function act(a, id) {
     case 'save':
       save(); toast('💾 Game saved'); break;
     case 'reset':
-      if (!confirm('Wipe your company and start over?')) return;
+      if (!confirm('Caution! Wipe your company and start over?')) return;
       // falls through
     case 'restart':
       S = newState();
