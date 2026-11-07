@@ -686,7 +686,7 @@ function renderTab() {
             <span class="mono">${kw(d.power)}</span> ·
             ≈<span class="mono">${money(d.cap * capMult(d.product) * P.price)}</span>/h at list price
           </div>
-          <div class="card-row">${btn('buyServer', d.id, `Buy · ${money(d.cost)}`)}</div>
+          <div class="card-row">${btn('buyServer', d.id, `Purchase · ${money(d.cost)}`)}</div>
         </div>`;
     }
   }
@@ -993,8 +993,8 @@ function showHelp() {
     <h2>Welcome to Uptime Tycoon</h2>
     <p class="muted">You run a tiny hosting company out of a garage. Turn it into a planet-scale cloud.</p>
     <ul>
-      <li><b>Buy servers</b> to add capacity for Compute, Storage and (later) GPU customers. Revenue = customers served × price.</li>
-      <li><b>Watch the market panel.</b> The white marker is demand. If it's past your capacity you have a waitlist — raise prices or add hardware. Idle capacity? Lower prices to attract more customers.</li>
+      <li><b>Buy servers</b> to add capacity for Compute, Storage and GPU customers. Your revenue = customers served × price.</li>
+      <li><b>Make sure you watch the market panel.</b> The white marker is demand. If it's past your capacity you have a waitlist — raise prices or add hardware. Idle capacity? Lower prices to attract more customers.</li>
       <li><b>Power</b> is a hard limit per facility. <b>Cooling</b> is soft — exceed it and servers start dying fast.</li>
       <li><b>Broken servers</b> earn nothing and tank your reputation. Hire engineers to prevent and fix failures automatically.</li>
       <li><b>Support agents</b> keep customers happy as you grow. <b>Reputation</b> multiplies demand.</li>
@@ -1002,7 +1002,7 @@ function showHelp() {
       <li>If cash stays negative for 72 hours, you're bankrupt.</li>
     </ul>
     <p class="muted">Space pauses. Progress autosaves in your browser.</p>
-    <div class="actions"><button class="btn" data-action="closeModal">Start hosting</button></div>
+    <div class="actions"><button class="btn" data-action="closeModal">Got it!</button></div>
   `);
 }
 
