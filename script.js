@@ -598,6 +598,9 @@ function act(a, id) {
       S.speed = +id; break;
     case 'save':
       save(); toast('💾 Game saved'); break;
+    case 'exportReport':
+      exportHostingReport();
+      return;
     case 'reset':
       if (!confirm('Caution! Wipe your company and start over?')) return;
       // falls through
@@ -934,6 +937,40 @@ function renderFinance() {
     <div class="kv"><span>Payroll</span><span class="bad">-${money(L.salaries)}</span></div>
     <div class="kv total"><span>Net profit</span><span class="${net >= 0 ? 'good' : 'bad'}">${net >= 0 ? '+' : ''}${money(net)}</span></div>
     <div class="kv"><span>Fleet uptime</span><span class="${L.uptime >= 0.98 ? 'good' : L.uptime >= 0.9 ? 'warn' : 'bad'}">${(L.uptime * 100).toFixed(1)}%</span></div>`;
+}
+
+function exportHostingReport() {
+  const cap = capacity();
+  const uptime = S.last.uptime * 100;
+  const report = $('#printReport');
+  const safeName = S.name.replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  })[char]);
+  const facilities = S.facilities.map(f => `
+    <li><b>${LOC[f.id].name}</b><span>${f.servers.length} servers · ${kw(facLoad(f))} active load</span></li>
+  `).join('');
+  const products = Object.keys(PRODUCTS).map(id => `
+    <tr><th>${PRODUCTS[id].name}</th><td>${fmt(S.last.served[id] || 0)} / ${fmt(cap[id])} ${PRODUCTS[id].unit}</td></tr>
+  `).join('');
+
+  report.innerHTML = `
+    <article class="report-card">
+      <header class="report-head">
+        <div><p class="report-kicker">Your Company's Report Card!</p><h1>${safeName}</h1></div>
+        <div class="report-date">${clockStr(S.hour)}<br>Generated ${new Date().toLocaleString()}</div>
+      </header>
+      <div class="report-score"><span>Company reputation</span><strong>${S.rep.toFixed(1)}<small> / 100</small></strong></div>
+      <section class="report-grid">
+        <div><span>Cash</span><b>${money(S.cash)}</b></div>
+        <div><span>Net profit / hour</span><b>${money(S.last.rev - S.last.exp)}/h</b></div>
+        <div><span>Valuation</span><b>${money(valuation())}</b></div>
+        <div><span>Fleet uptime</span><b>${uptime.toFixed(1)}%</b></div>
+      </section>
+      <section class="report-section"><h2>Service &amp; Capacity</h2><table>${products}</table></section>
+      <section class="report-section"><h2>Facilities (${S.facilities.length})</h2><ul>${facilities}</ul></section>
+      <footer class="report-foot">${totalServers()} servers deployed  ${Object.keys(S.milestones).length}/${MILESTONES.length} milestones · Lifetime revenue ${money(S.stats.revTotal)}</footer>
+    </article>`;
+  window.print();
 }
 
 function renderLog() {
