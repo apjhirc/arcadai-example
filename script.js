@@ -82,6 +82,8 @@ const MAX_UPGRADE = 5;
 /* ---------------- State ---------------- */
 
 const SAVE_KEY = 'uptimeTycoon.v1';
+const LOGO_KEY = 'uptimeTycoon.logo.v1';
+const MAX_LOGO_SIZE = 2 * 1024 * 1024;
 
 function newState() {
   return {
@@ -1051,6 +1053,41 @@ document.addEventListener('click', e => {
   act(el.dataset.action, el.dataset.id);
 });
 
+$('#logoButton').addEventListener('click', () => $('#logoInput').click());
+
+$('#logoInput').addEventListener('change', e => {
+  const input = e.target;
+  const file = input.files[0];
+  input.value = '';
+  if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    toast('Please choose an image file.');
+    return;
+  }
+  if (file.size > MAX_LOGO_SIZE) {
+    toast('Logo image must be 2 MB or smaller.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+    if (typeof reader.result !== 'string') {
+      toast('Could not read that image.');
+      return;
+    }
+    try {
+      localStorage.setItem(LOGO_KEY, reader.result);
+      $('#logoImage').src = reader.result;
+      $('#logoImage').hidden = false;
+      $('#logoMark').hidden = true;
+    } catch (error) {
+      toast('Could not save the logo in this browser.');
+    }
+  });
+  reader.addEventListener('error', () => toast('Could not read that image.'));
+  reader.readAsDataURL(file);
+});
+
 $('#modal').addEventListener('click', e => {
   if (e.target.id === 'modal' && !S.gameOver) closeModal();
 });
@@ -1076,6 +1113,17 @@ function loop() {
 }
 
 /* ---------------- Boot ---------------- */
+
+try {
+  const logo = localStorage.getItem(LOGO_KEY);
+  if (logo) {
+    $('#logoImage').src = logo;
+    $('#logoImage').hidden = false;
+    $('#logoMark').hidden = true;
+  }
+} catch (error) {
+  toast('Could not load the saved logo.');
+}
 
 buildMarket();
 if (firstRun) log('Founded a hosting company in a garage. Let\'s go! 🚀', 'good');

@@ -12,7 +12,11 @@
 <body>
   <header class="topbar">
     <div class="brand">
-      <span class="logo" aria-hidden="true"><i></i><i></i><i></i></span>
+      <button class="logo" id="logoButton" type="button" title="Change logo" aria-label="Change logo">
+        <span id="logoMark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <img id="logoImage" alt="" hidden>
+      </button>
+      <input id="logoInput" type="file" accept="image/*" hidden>
       <div>
         <button class="company" id="companyName" data-action="rename" title="Rename company">NimbusStack</button>
         <div class="subtitle">Hosting &amp; Cloud Infra</div>
